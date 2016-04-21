@@ -364,9 +364,11 @@ value_string (hive_h *h, void *writer_v, hive_node_h node, hive_value_h value,
   }
 
   start_value (writer, key, type, NULL);
+  /* AJN - Value data needs to be encoded somehow.  xmlTextWriterWriteString generates text that xmllint and Python's ElementTree fail to parse.  Until a suitable encoding is implemented, suppress value content.
   XML_CHECK (xmlTextWriterStartAttribute, (writer, BAD_CAST "value"));
   XML_CHECK (xmlTextWriterWriteString, (writer, BAD_CAST str));
   XML_CHECK (xmlTextWriterEndAttribute, (writer));
+  */
   ret = value_byte_runs (h, writer_v, value);
   end_value (writer);
   return ret;
